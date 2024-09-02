@@ -1,16 +1,33 @@
 for _ in range(int(input())):
     n=int(input())
     a=list(map(int,input().split()))
+    res=0
     ans=0
-    if 1 in a and a.index(1)!=0:
-        print(-1)
-    else:
-        for i in range(n-1):
-            x=a[i]
-            y=a[i+1]
+    
+    for i in range(n-1):
+        x=a[i]
+        y=a[i+1]
+        ans1=0
+        ans2=0
+        if y==1 and x>1:
+            res=-1
+            break
+        while x>y:
+            y*=y
+            ans1+=1
+        while x*x<=y:
+            if x==1:
+                ans2=-1
+                break
+            x*=x
+            ans2+=1
             
-            while x>y:
-                y*=y
-                ans+=1
-            a[i+1]=y
-        print(ans)
+        if ans1:
+            ans+=ans1
+        elif ans2==-1:
+            ans=0
+        else:
+            ans=max(0,ans-ans2)
+        res+=ans
+    print(res)
+            
